@@ -22,7 +22,7 @@ class MyHTTPRequestHandler(SimpleHTTPRequestHandler):
             post_data = self.rfile.read(content_length)
 
             with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-                s.connect(('localhost', 5000))
+                s.connect(('socket_server', 5000))
                 s.sendall(post_data)
 
             self.send_response(302)  

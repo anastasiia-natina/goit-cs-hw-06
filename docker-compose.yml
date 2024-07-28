@@ -14,13 +14,18 @@ services:
       - socket
 
   socket:
-    build:
-      context: .
-      dockerfile: Dockerfile.socket
+    http_server:
+    context: .
+    dockerfile: ./Dockerfile.socket
+    build: ./http_server
+    ports:
+      - "8000:8000"
+    depends_on:
+      - socket_server
+  socket_server:
+    build: ./socket_server
     ports:
       - "5000:5000"
-    volumes:
-      - .:/app
 
   mongo:
     image: mongo:latest
